@@ -256,10 +256,10 @@ class CryptoPanicScraper:
         logger.warning(f"Failed to fetch text for {selector} after {self.max_retries} retries. Using default: '{default_value}'")
         return default_value
 
-    async def retry_fetch_attribute(self, element, selector, attribute, default_value, retries=2):
+    async def retry_fetch_attribute(self, element, selector, attribute, default_value):
         """Retry fetching an attribute from an element."""
         attempt = 0
-        while attempt < retries:
+        while attempt < self.max_retries:
             try:
                 elem = await element.query_selector(selector)
                 if elem:
@@ -267,11 +267,11 @@ class CryptoPanicScraper:
                     if attr:
                         return attr.strip()
             except Exception as e:
-                logger.warning(f"Retry {attempt+1}/{retries} fetching attribute {attribute} for {selector}: {e}")
+                logger.warning(f"Retry {attempt+1}/{self.max_retries} fetching attribute {attribute} for {selector}: {e}")
             attempt += 1
             await asyncio.sleep(1)
 
-        logger.warning(f"Failed to fetch attribute {attribute} for {selector} after {retries} retries. Using default: '{default_value}'")
+        logger.warning(f"Failed to fetch attribute {attribute} for {selector} after {self.max_retries} retries. Using default: '{default_value}'")
         return default_value
 
     async def get_source_type(self, element):
