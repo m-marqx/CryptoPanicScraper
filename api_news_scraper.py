@@ -141,10 +141,9 @@ class CryptoPanicScraper:
     async def collect_data(self, page):
         """Collect data from the page."""
         retries = 0
-        max_retries = 2
         loaded_elements = 0
 
-        while loaded_elements < self.limit and retries < max_retries:
+        while loaded_elements < self.limit and retries < self.max_retries:
             # Load more content if possible
             await self.load_more(page)
 
@@ -157,7 +156,7 @@ class CryptoPanicScraper:
                 break
 
             retries += 1
-            logger.warning(f"Retry {retries}/{max_retries} to load more articles.")
+            logger.warning(f"Retry {retries}/{self.max_retries} to load more articles.")
 
         if loaded_elements == 0:
             logger.error("No articles loaded.")
