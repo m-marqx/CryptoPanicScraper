@@ -354,3 +354,44 @@ class CryptoPanicScraper:
 
         logger.info(f"Data saved to {self.file_path}")
 
+    def save_data_to_db(self):
+        """Save data to a database (placeholder function)."""
+        if not self.engine:
+            logger.error("No database engine provided.")
+            raise TypeError("Database engine is not set.")
+
+        self.engine.connect()
+        metadata = sqlalchemy.MetaData()
+        news_table = sqlalchemy.Table(
+            'news',
+            metadata,
+            sqlalchemy.Column('id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
+            sqlalchemy.Column('date', sqlalchemy.String),
+            sqlalchemy.Column('title', sqlalchemy.String),
+            sqlalchemy.Column('currencies', sqlalchemy.String),
+            sqlalchemy.Column('votes', sqlalchemy.String),
+            sqlalchemy.Column('source', sqlalchemy.String),
+            sqlalchemy.Column('source_type', sqlalchemy.String),
+            sqlalchemy.Column('url', sqlalchemy.String, primary_key=True),
+            sqlalchemy.Column('sentiment', sqlalchemy.String),
+            sqlalchemy.Column('confidence', sqlalchemy.Integer),
+        )
+        metadata.create_all(self.engine)
+        conn = self.engine.connect()
+
+        for article in self.cached_data.values():
+            ins = news_table.insert().values(
+                date=article['Date'],
+                title=article['Title'],
+                currencies=json.dumps(article['Currencies']),
+                votes=json.dumps(article['Votes']),
+                source=article['Source'],
+                source_type=article['Source_Type'],
+                url=article['URL'],
+                sentiment=article['Sentiment'],
+                confidence=article['Confidence'],
+            )
+            try:
+                conn.execute(ins)
+            except sqlalchemy.exc.IntegrityError:
+                logger.info(f"Article already exists in DB: {article['URL']}")
