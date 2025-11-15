@@ -401,3 +401,39 @@ class CryptoPanicScraper:
                 conn.execute(ins)
             except sqlalchemy.exc.IntegrityError:
                 logger.info(f"Article already exists in DB: {article['URL']}")
+
+    def fetch_description_body_jina(
+        self,
+        url: str,
+        minimum_time: float,
+    ) -> str:
+        start = time.perf_counter()
+        url = f"https://r.jina.ai/https://cryptopanic.com{url}"
+
+        headers = {
+            "Accept": "application/json",
+            "X-Engine": "direct",
+            "X-Return-Format": "text",
+        }
+
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+
+        try:
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()  # Raise an error for HTTP errors
+        except requests.RequestException as e:
+            logger.error(f"Error fetching {url}: {e}")
+            return f"Error fetching content: {e}"
+        except Exception as e:
+            logger.error(f"Unexpected error fetching {url}: {e}")
+            return f"Unexpected error fetching content: {e}"
+
+        end = time.perf_counter()
+
+        if end - start < minimum_time:
+            time.sleep(minimum_time - (end - start))
+        if response.status_code == 200:
+            description_body = response.json()["data"]["description"]
+            return description_body
+
