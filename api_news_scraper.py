@@ -497,3 +497,27 @@ class CryptoPanicScraper:
                     return f"Error fetching content: {e}"
 
         return f"Error: Failed after {max_retries} retries"
+
+    def update_descriptions(
+        self,
+        rate_time: float = 3.0, # Default jina rate limit for free tier for non-authenticated requests
+        update_cached_data: bool = False, # Whether to update cached data or current data
+    ):
+        """Load descriptions for articles that don't have them yet."""
+        start_time = time.perf_counter()
+        data_source = self.cached_data if update_cached_data else self.data
+        for article in tqdm(data_source, desc="Updating descriptions"):
+            if 'description_body' not in article or not article['description_body']:
+                description = self.fetch_description_body_jina(
+                    article['URL'],
+                    rate_time,
+                )
+                article['description_body'] = description
+                end_time = time.perf_counter()
+                elapsed_time = end_time - start_time
+                if elapsed_time < rate_time:
+                    time.sleep(rate_time - elapsed_time)
+                    logger.info(
+                        f"Sleeping for {rate_time - elapsed_time:.2f} seconds to respect rate limit"
+                    )
+
