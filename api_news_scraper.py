@@ -78,13 +78,51 @@ class CryptoPanicScraper:
         self.vader_analyzer.lexicon.update(financial_terms)
         logger.info("Updated VADER lexicon with financial terms.")
 
-    def load_cached_data(self):
+    def load_cached_data(self, format: Literal['pickle', 'json', 'db'] = 'json'):
         """Load previously scraped data (cached data) from the file if it exists."""
+        if format == 'db':
+            if not self.engine:
+                logger.error("No database engine provided.")
+                raise TypeError("Database engine is not set.")
+
+            try:
+                cached_data = {}
+                conn = self.engine.connect()
+                result = conn.execute(sqlalchemy.text("SELECT * FROM news"))
+                for row in result:
+                    cached_data[row['url']] = {
+                        "Date": row['date'],
+                        "Title": row['title'],
+                        "Currencies": json.loads(row['currencies']),
+                        "Votes": json.loads(row['votes']),
+                        "Source": row['source'],
+                        "Source_Type": row['source_type'],
+                        "URL": row['url'],
+                        "Sentiment": row['sentiment'],
+                        "Confidence": row['confidence'],
+                    }
+                logger.info(f"Loaded cached data from database with {len(cached_data)} entries.")
+                return cached_data
+            except Exception as e:
+                logger.error(f"Failed to load cached data from database: {e}")
+                return {}
+
         if os.path.exists(self.file_path):
-            with open(self.file_path, 'rb') as f:
-                logger.info(f"Loaded cached data from {self.file_path}")
-                return pickle.load(f)
-        logger.info("No cached data found.")
+            try:
+                if format == 'pickle':
+                    with open(self.file_path, 'rb') as f:
+                        cached_data = pickle.load(f)
+                elif format == 'json':
+                    with open(self.file_path, 'r') as f:
+                        cached_data = json.load(f)
+                logger.info(f"Loaded cached data from {self.file_path} with {len(cached_data)} entries.")
+                return cached_data
+
+            except Exception as e:
+                logger.error(f"Failed to load cached data: {e}")
+                return {}
+
+        logger.info("No cached data file found. Starting fresh.")
         return {}
 
     async def run(self):
