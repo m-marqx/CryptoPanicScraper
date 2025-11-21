@@ -128,14 +128,13 @@ class CryptoPanicScraper:
     async def run(self):
         """Run the scraper."""
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             page = await browser.new_page()
 
             url = f"https://www.cryptopanic.com/news?filter={self.filter}"
             logger.info(f"Navigating to {url}")
             await page.goto(url)
 
-            # If topic is provided, perform the search
             if self.topic:
                 await self.search_topic(page, self.topic)
 
@@ -145,8 +144,15 @@ class CryptoPanicScraper:
 
             # Save the collected data to a file if there are new articles
             if self.data:
-                self.save_data()
-
+                self.merge_data()
+                rate_time = 0.12 if self.api_key else 3.0
+                if self.api_key:
+                    logger.info("Using authenticated requests for description fetching.")
+                    self.update_descriptions(rate_time, update_cached_data=False)
+                else:
+                    logger.info("Using unauthenticated requests for description fetching.")
+                    await self.async_update_descriptions(rate_time, update_cached_data=False)
+                self.save_data(format='json')
 
     async def get_news_sentiment(self, symbol: str):
         """Fetch sentiment data for a given symbol."""
