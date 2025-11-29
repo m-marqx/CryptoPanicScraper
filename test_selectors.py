@@ -80,3 +80,38 @@ batch_2 = {
     }
 }
 
+batch_3 = {
+    "beincrypto.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "div.Content-sc-e9e4289e-11",
+        "X-Remove-Selector": ".MoreByAuthor-sc-4b5de9b4-0, .ShareArticle-sc-4d23ff5e-0, .TopPlatforms-sc-8ba59215-6, .MostRead-sc-15cb59b9-11, .Newsletter-sc-f28af7a7-0, header, footer"
+    },
+    "blocknews.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": ".content-inner",
+        "X-Remove-Selector": ".jeg_share_top, .jeg_share_bottom, .jnews_prev_next_container, .jnews_author_box_container, .jnews_related_post_container, .jnews_comment_container"
+    },
+    "blockworks.co": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    },
+    "br.beincrypto.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "div.Content-sc-e9e4289e-11"
+    },
+    "catenaa.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    }
+}
+
