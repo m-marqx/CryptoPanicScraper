@@ -262,3 +262,38 @@ batch_8 = {
     }
 }
 
+batch_9 = {
+    "finbold.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article header h1, article .entry-content",
+        "X-Remove-Selector": "footer"
+    },
+    "fxstreet.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    },
+    "ihodl.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "section.article-lt__main"
+    },
+    "livecoins.com.br": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": ".tdc-row.stretch_row_1600.td-stretch-content, .td_block_wrap.tdb_single_content.tdi_89.td-pb-border-top.conteudo-post.td_block_template_8.td-post-content.tagdiv-type",
+        "X-Remove-Selector": "figcaption"
+    },
+    "newsbtc.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": ".post-content",
+        "X-Remove-Selector": ".share-buttons, .related-posts"
+    }
+}
