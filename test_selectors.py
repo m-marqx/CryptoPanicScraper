@@ -297,3 +297,38 @@ batch_9 = {
         "X-Remove-Selector": ".share-buttons, .related-posts"
     }
 }
+
+batch_10 = {
+    "protos.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    },
+    "sfctoday.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    },
+    "solanafloor.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    },
+    "spaziocrypto.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": ".post-content",
+        "X-Remove-Selector": ".share-buttons, .related-posts"
+    },
+    "square.binance.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article"
+    }
+}
+
