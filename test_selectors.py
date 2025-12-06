@@ -332,3 +332,38 @@ batch_10 = {
     }
 }
 
+batch_11 = {
+    "theblock.co": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Remove-Selector": ".copyright",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "#articleContent",
+    },
+    "thecoinrepublic.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": ".td_block_wrap.tdb_single_content.tdi_123.td-pb-border-top.td_block_template_1.td-post-content.tagdiv-type",
+    },
+    "thedefiant.io": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "article h1, article .font-serif, article .prose"
+    },
+    "theholycoins.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": "div h1, .article-body"
+    },
+    "thestreet.com": {
+        "Accept": "application/json",
+        "Authorization": "Bearer jina_4d7479b1a43542138c177e3e3a76f7c7RgVhcuusmPIdTaGzSVumpW_Zf3Gi",
+        "X-Retain-Images": "none",
+        "X-Target-Selector": ".m-detail-header--content, .m-detail--body",
+        "X-Remove-Selector": "phoenix-super-link, footer"
+    }
+}
+
