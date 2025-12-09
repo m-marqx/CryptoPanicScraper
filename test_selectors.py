@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import time
 from collections import defaultdict
+import json
 
 # Load data to get sample URLs for each source
 cached_data = pd.read_json("news_data/cryptopanic_all_cache.json").T
