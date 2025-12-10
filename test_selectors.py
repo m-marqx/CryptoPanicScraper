@@ -405,3 +405,13 @@ batch_12 = {
     }
 }
 
+# Test each source
+results = defaultdict(dict)
+failed_sources = []
+all_headers = {**batch_1, **batch_2, **batch_3, **batch_4, **batch_5, **batch_6, **batch_7, **batch_8, **batch_9, **batch_10, **batch_11, **batch_12}
+
+
+
+print(f"Testing {len(all_headers)} sources...")
+print("=" * 80)
+
