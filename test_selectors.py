@@ -468,3 +468,11 @@ if failed_sources:
         print(f"URL: {item['url']}")
         print(f"Current selector: {item['headers'].get('X-Target-Selector', 'N/A')}")
 
+# Save results to file
+with open('selector_test_results.json', 'w') as f:
+    json.dump({
+        'results': dict(results),
+        'failed_sources': failed_sources
+    }, f, indent=2)
+
+print("\nResults saved to selector_test_results.json")
