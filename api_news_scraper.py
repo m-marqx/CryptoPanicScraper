@@ -83,7 +83,7 @@ class CryptoPanicScraper:
         format: Literal["pickle", "json", "db"] = "json"
     ):
         """Load previously scraped data (cached data) from the file if it exists."""
-        if format == 'db':
+        if format == "db":
             if not self.engine:
                 logger.error("No database engine provided.")
                 raise TypeError("Database engine is not set.")
@@ -93,18 +93,20 @@ class CryptoPanicScraper:
                 conn = self.engine.connect()
                 result = conn.execute(sqlalchemy.text("SELECT * FROM news"))
                 for row in result:
-                    cached_data[row['url']] = {
-                        "Date": row['date'],
-                        "Title": row['title'],
-                        "Currencies": json.loads(row['currencies']),
-                        "Votes": json.loads(row['votes']),
-                        "Source": row['source'],
-                        "Source_Type": row['source_type'],
-                        "URL": row['url'],
-                        "Sentiment": row['sentiment'],
-                        "Confidence": row['confidence'],
+                    cached_data[row["url"]] = {
+                        "Date": row["date"],
+                        "Title": row["title"],
+                        "Currencies": json.loads(row["currencies"]),
+                        "Votes": json.loads(row["votes"]),
+                        "Source": row["source"],
+                        "Source_Type": row["source_type"],
+                        "URL": row["url"],
+                        "Sentiment": row["sentiment"],
+                        "Confidence": row["confidence"],
                     }
-                logger.info(f"Loaded cached data from database with {len(cached_data)} entries.")
+                logger.info(
+                    f"Loaded cached data from database with {len(cached_data)} entries."
+                )
                 return cached_data
             except Exception as e:
                 logger.error(f"Failed to load cached data from database: {e}")
