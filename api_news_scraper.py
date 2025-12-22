@@ -114,8 +114,8 @@ class CryptoPanicScraper:
 
         if os.path.exists(self.file_path):
             try:
-                if format == 'pickle':
-                    with open(self.file_path, 'rb') as f:
+                if format == "pickle":
+                    with open(self.file_path, "rb") as f:
                         cached_data = pickle.load(f)
                 elif format == 'json':
                     with open(self.file_path, 'r') as f:
