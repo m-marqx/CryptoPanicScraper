@@ -117,10 +117,12 @@ class CryptoPanicScraper:
                 if format == "pickle":
                     with open(self.file_path, "rb") as f:
                         cached_data = pickle.load(f)
-                elif format == 'json':
-                    with open(self.file_path, 'r') as f:
+                elif format == "json":
+                    with open(self.file_path, "r") as f:
                         cached_data = json.load(f)
-                logger.info(f"Loaded cached data from {self.file_path} with {len(cached_data)} entries.")
+                logger.info(
+                    f"Loaded cached data from {self.file_path} with {len(cached_data)} entries."
+                )
                 return cached_data
 
             except Exception as e:
