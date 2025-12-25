@@ -154,12 +154,20 @@ class CryptoPanicScraper:
                 self.merge_data()
                 rate_time = 0.12 if self.api_key else 3.0
                 if self.api_key:
-                    logger.info("Using authenticated requests for description fetching.")
-                    self.update_descriptions(rate_time, update_cached_data=False)
+                    logger.info(
+                        "Using authenticated requests for description fetching."
+                    )
+                    self.update_descriptions(
+                        rate_time, update_cached_data=False
+                    )
                 else:
-                    logger.info("Using unauthenticated requests for description fetching.")
-                    await self.async_update_descriptions(rate_time, update_cached_data=False)
-                self.save_data(format='json')
+                    logger.info(
+                        "Using unauthenticated requests for description fetching."
+                    )
+                    await self.async_update_descriptions(
+                        rate_time, update_cached_data=False
+                    )
+                self.save_data(format="json")
 
     async def get_news_sentiment(self, symbol: str):
         """Fetch sentiment data for a given symbol."""
