@@ -179,18 +179,24 @@ class CryptoPanicScraper:
         """Search for a specific topic using the search bar."""
         try:
             # Locate the search input element and enter the topic
-            search_input = await page.query_selector('#acSearchInput')
+            search_input = await page.query_selector("#acSearchInput")
             if search_input:
                 logger.info(f"Searching for topic: {topic}")
                 await search_input.fill(topic)
                 await page.keyboard.press("Enter")
-                await page.wait_for_timeout(2000)  # Give some time for results to load
+                await page.wait_for_timeout(
+                    2000
+                )  # Give some time for results to load
 
                 # Optionally click the first relevant result
-                first_result = await page.query_selector(".ac__entry.ac__selected")
+                first_result = await page.query_selector(
+                    ".ac__entry.ac__selected"
+                )
                 if first_result:
                     await first_result.click()
-                    logger.info(f"Clicked on the first search result for topic: {topic}")
+                    logger.info(
+                        f"Clicked on the first search result for topic: {topic}"
+                    )
                     await page.wait_for_timeout(2000)
             else:
                 logger.warning("Search input not found.")
