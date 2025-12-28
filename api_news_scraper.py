@@ -307,13 +307,17 @@ class CryptoPanicScraper:
         """Load more content by scrolling down or clicking 'Load More'."""
         try:
             # Check if there's a 'Load More' button and click it if it exists
-            load_more_button = await page.query_selector('.btn-outline-primary')
+            load_more_button = await page.query_selector(
+                ".btn-outline-primary"
+            )
             if load_more_button:
                 await load_more_button.click()
                 logger.info("Clicked 'Load More' button.")
             else:
                 # If no 'Load More' button, simulate scrolling
-                await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                await page.evaluate(
+                    "window.scrollTo(0, document.body.scrollHeight)"
+                )
                 logger.info("Scrolled to the bottom of the page.")
 
             # Wait for the new content to load
@@ -333,11 +337,15 @@ class CryptoPanicScraper:
                     if text:
                         return text.strip()
             except Exception as e:
-                logger.warning(f"Retry {attempt+1}/{self.max_retries} fetching text for {selector}: {e}")
+                logger.warning(
+                    f"Retry {attempt + 1}/{self.max_retries} fetching text for {selector}: {e}"
+                )
             attempt += 1
             await asyncio.sleep(1)
 
-        logger.warning(f"Failed to fetch text for {selector} after {self.max_retries} retries. Using default: '{default_value}'")
+        logger.warning(
+            f"Failed to fetch text for {selector} after {self.max_retries} retries. Using default: '{default_value}'"
+        )
         return default_value
 
     async def retry_fetch_attribute(self, element, selector, attribute, default_value):
